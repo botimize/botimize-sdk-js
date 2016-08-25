@@ -1,0 +1,11 @@
+.idea/
+dist/
+*.iml
+npm-debug.log
+*.pyc
+logs/
+*.swp
+
+node_modules/
+lib/
+

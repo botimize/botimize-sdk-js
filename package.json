@@ -1,0 +1,33 @@
+{
+  "name": "botimize",
+  "version": "0.0.1",
+  "description": "The sdk of botimize",
+  "directories": {
+    "lib": "./lib"
+  },
+  "keywords": [
+    "botimize",
+    "bot",
+    "sdk",
+    "analysis"
+  ],
+  "author": "botimize, Inc. <dev@botimize.io>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/botimize/botimize-sdk-js.git"
+  },
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+  "main": "lib/botimize.js",
+  "dependencies": {
+    "request": "^2.74.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-core": "^6.13.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-es2015": "^6.13.2"
+  }
+}
