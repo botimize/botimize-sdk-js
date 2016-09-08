@@ -14,8 +14,7 @@
 - Use API key to create a new botimize object:
 
   ```javascript
-  const Botimize = require('botimize');
-  const botimize = new Botimize('<YOUR-API-KEY'>, 'facebook');
+  const botimize = require('botimize')('<YOUR-API-KEY'>, 'facebook');
   ```
 
 - Log incoming messages:
