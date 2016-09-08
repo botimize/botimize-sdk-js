@@ -73,16 +73,21 @@ export default class BotimizeCore {
     });
   }
 
-  logIncoming(data) {
+  logIncoming(data, source = 'npm') {
+    const prefix = `[botimize][${this.superProperties.platform}][incoming][${source}]`;
+    console.log(`${prefix}: ${JSON.stringify(data, null, 2)}`)
     this.track('incoming', data);
   }
 
   logOutgoing(data, source = 'npm') {
+    const prefix = `[botimize][${this.superProperties.platform}][outgoing][${source}]`;
     if (this.superProperties.platform === 'facebook' && source === 'npm') {
       let newData = data.json;
       newData.access_token = data.qs.access_token;
+      console.log(`${prefix}: ${JSON.stringify(newData, null, 2)}`);
       this.track('outgoing', newData);
     } else {
+      console.log(`${prefix}: ${JSON.stringify(data, null, 2)}`);
       this.track('outgoing', data);
     }
   }
