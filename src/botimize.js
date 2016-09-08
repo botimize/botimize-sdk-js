@@ -20,7 +20,7 @@ function makeRequest(options, cb) {
   }
 }
 
-export default class BotimizeCore {
+class BotimizeCore {
   /*
    * constructor
    *
@@ -34,6 +34,7 @@ export default class BotimizeCore {
       throw new Error('Specified platform is not supported: ' + platform);
     }
     this.apiKey = apiKey;
+    this.platform = platform;
     // super properties
     this.superProperties = {
       "platform": platform,
@@ -60,7 +61,7 @@ export default class BotimizeCore {
       json: true,
       body: {
         tag: this.superProperties.tag,
-        platform: this.superProperties.platform,
+        platform: this.platform,
         direction: event,
         raw: _props,
       }
@@ -74,14 +75,14 @@ export default class BotimizeCore {
   }
 
   logIncoming(data, source = 'npm') {
-    const prefix = `[botimize][${this.superProperties.platform}][incoming][${source}]`;
+    const prefix = `[botimize][${this.platform}][incoming][${source}]`;
     console.log(`${prefix}: ${JSON.stringify(data, null, 2)}`)
     this.track('incoming', data);
   }
 
   logOutgoing(data, source = 'npm') {
-    const prefix = `[botimize][${this.superProperties.platform}][outgoing][${source}]`;
-    if (this.superProperties.platform === 'facebook' && source === 'npm') {
+    const prefix = `[botimize][${this.platform}][outgoing][${source}]`;
+    if (this.platform === 'facebook' && source === 'npm') {
       let newData = data.json;
       newData.access_token = data.qs.access_token;
       console.log(`${prefix}: ${JSON.stringify(newData, null, 2)}`);
@@ -117,4 +118,8 @@ export default class BotimizeCore {
       }
     });
   }
+}
+
+export default function botimize(apiKey, platform) {
+  return new BotimizeCore(apiKey, platform);
 }
