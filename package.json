@@ -18,7 +18,8 @@
     "url": "https://github.com/botimize/botimize-sdk-js.git"
   },
   "scripts": {
-    "build": "babel src -d lib"
+    "build": "babel src -d lib",
+    "prepublish": "npm run build"
   },
   "main": "lib/botimize.js",
   "dependencies": {
