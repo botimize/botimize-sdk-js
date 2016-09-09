@@ -1,6 +1,6 @@
 {
   "name": "botimize",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "The sdk of botimize",
   "directories": {
     "lib": "./lib"
