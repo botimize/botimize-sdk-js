@@ -22,7 +22,7 @@
 
   ```javascript
   app.post('/webhook', function (req, res)) {
-    botimize.logIncoming(req.data);
+    botimize.logIncoming(req.body);
     ...
   }
   ```
