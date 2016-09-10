@@ -1,6 +1,6 @@
 import request from 'request';
 
-//const API_SERVER = "https://botimize.io";
+// const API_SERVER = "https://botimize.io";
 const API_URL = 'http://localhost:3030/api/';
 
 function makeRequest(options, cb) {
@@ -37,8 +37,8 @@ class BotimizeCore {
     this.platform = platform;
     // super properties
     this.superProperties = {
-      "platform": platform,
-      "tag": "unknown",
+      platform: platform,
+      tag: 'unknown',
     };
   }
 
@@ -76,7 +76,7 @@ class BotimizeCore {
 
   logIncoming(data, source = 'npm') {
     const prefix = `[botimize][${this.platform}][incoming][${source}]`;
-    console.log(`${prefix}: ${JSON.stringify(data, null, 2)}`)
+    console.log(`${prefix}: ${JSON.stringify(data, null, 2)}`);
     this.track('incoming', data);
   }
 

@@ -1,0 +1,18 @@
+{
+  "extends" : [
+    "standard"
+  ],
+  "rules": {
+    "strict": 0,
+    "comma-dangle": 0,
+    "indent": [2, 2, {"SwitchCase": 1}],
+    "no-console": 0,
+    "no-alert": 0,
+    "no-return-assign": 0,
+    "semi" : [2, "always"],
+    "max-len": [2, 200, 2],
+    "generator-star-spacing": 0,
+    "space-before-function-paren": [0, "never"],
+    "standard/computed-property-even-spacing": 0
+  }
+}

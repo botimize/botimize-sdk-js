@@ -36,7 +36,7 @@
  *
  */
 
-'use strict'
+'use strict';
 
 if (!process.env.PAGE_TOKEN) {
   console.log('Missing PAGE_TOKEN in environment');
@@ -86,35 +86,35 @@ app.get('/webhook/', function (req, res) {
 app.post('/webhook/', function (req, res) {
   console.log('Incoming: ' + req.body);
   botimize.logIncoming(req.body);
-  let messaging_events = req.body.entry[0].messaging;
-    for (let i = 0; i < messaging_events.length; i++) {
-      let event = req.body.entry[0].messaging[i];
-        let sender = event.sender.id;
-        if (event.message && event.message.text) {
-          let text = event.message.text;
-            if (text === 'Generic') {
-              sendGenericMessage(sender);
-                continue;
-            }
-            if (text === 'Email') {
-              // Uncomment this line to use the notify API sending notifications.
-              // botimize.notify('<your-email>', 'notification message');
-              console.log('Email sent');
-            }
-          sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200));
-        }
-      if (event.postback) {
-        let text = JSON.stringify(event.postback);
-          sendTextMessage(sender, "Postback received: " + text.substring(0, 200));
-          continue;
+  let messagingEvents = req.body.entry[0].messaging;
+  for (let i = 0; i < messagingEvents.length; i++) {
+    let event = req.body.entry[0].messaging[i];
+    let sender = event.sender.id;
+    if (event.message && event.message.text) {
+      let text = event.message.text;
+      if (text === 'Generic') {
+        sendGenericMessage(sender);
+        continue;
       }
+      if (text === 'Email') {
+        // Uncomment this line to use the notify API sending notifications.
+        // botimize.notify('<your-email>', 'notification message');
+        console.log('Email sent');
+      }
+      sendTextMessage(sender, 'Text received, echo: ' + text.substring(0, 200));
     }
-  res.sendStatus(200)
+    if (event.postback) {
+      let text = JSON.stringify(event.postback);
+      sendTextMessage(sender, 'Postback received: ' + text.substring(0, 200));
+      continue;
+    }
+  }
+  res.sendStatus(200);
 });
 
 function makeSendRequest(options) {
   request(options, (err, res, body) => {
-    console.log('Outgoing: ' + options)
+    console.log('Outgoing: ' + options);
     botimize.logOutgoing(options);
     if (err) {
       console.log('Error in sending messages: ' + err);
@@ -131,7 +131,9 @@ function sendTextMessage(sender, text) {
     qs: {access_token: process.env.PAGE_TOKEN},
     method: 'POST',
     json: {
-      recipient: {id:sender},
+      recipient: {
+        id: sender
+      },
       message: messageData,
     }
   };
@@ -140,36 +142,36 @@ function sendTextMessage(sender, text) {
 
 function sendGenericMessage(sender) {
   let messageData = {
-    "attachment": {
-      "type": "template",
-      "payload": {
-        "template_type": "generic",
-        "elements": [{
-          "title": "First card",
-          "subtitle": "Element #1 of an hscroll",
-          "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
-          "buttons": [{
-            "type": "web_url",
-            "url": "https://www.messenger.com",
-            "title": "web url"
+    attachment: {
+      type: 'template',
+      payload: {
+        template_type: 'generic',
+        elements: [{
+          title: 'First card',
+          subtitle: 'Element #1 of an hscroll',
+          image_url: 'http://messengerdemo.parseapp.com/img/rift.png',
+          buttons: [{
+            type: 'web_url',
+            url: 'https://www.messenger.com',
+            title: 'web url'
           }, {
-            "type": "postback",
-            "title": "Postback",
-            "payload": "Payload for first element in a generic bubble",
+            type: 'postback',
+            title: 'Postback',
+            payload: 'Payload for first element in a generic bubble',
           }],
         }, {
-          "title": "Second card",
-          "subtitle": "Element #2 of an hscroll",
-          "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
-          "buttons": [{
-            "type": "postback",
-            "title": "Postback",
-            "payload": "Payload for second element in a generic bubble",
+          title: 'Second card',
+          subtitle: 'Element #2 of an hscroll',
+          image_url: 'http://messengerdemo.parseapp.com/img/gearvr.png',
+          buttons: [{
+            type: 'postback',
+            title: 'Postback',
+            payload: 'Payload for second element in a generic bubble',
           }],
         }]
       }
     }
-  }
+  };
   var options = {
     url: 'https://graph.facebook.com/v2.6/me/messages',
     qs: {access_token: process.env.PAGE_TOKEN},
@@ -187,15 +189,15 @@ let tunnel = localtunnel(app.get('port'), {subdomain: subdomain}, (err, tunnel) 
   if (err) {
     process.exit();
   }
-  console.log("Your bot is available on the web at the following URL: " + tunnel.url + '/webhook');
+  console.log('Your bot is available on the web at the following URL: ' + tunnel.url + '/webhook');
 });
 
 tunnel.on('close', () => {
-  console.log("Your bot is no longer available on the web at the localtunnnel.me URL.");
+  console.log('Your bot is no longer available on the web at the localtunnnel.me URL.');
   process.exit();
 });
 
 // Spin up the server
 app.listen(app.get('port'), function() {
-    console.log('running on port', app.get('port'));
-})
+  console.log('running on port', app.get('port'));
+});
