@@ -1,5 +1,7 @@
 ## [botimize](botimize.io) - Analytics built to optimize your bots
-[![npm](https://img.shields.io/npm/v/botimize.svg?style=flat-square)](https://www.npmjs.com/package/botimize)
+
+[![build status](https://img.shields.io/travis/botimize/botimize-sdk-js/master.svg?style=flat-square)](https://travis-ci.org/botimize/botimize-sdk-js)
+[![npm version](https://img.shields.io/npm/v/botimize.svg?style=flat-square)](https://www.npmjs.com/package/botimize)
 
 ### Setup
 
@@ -48,4 +50,3 @@
   botimize.notify('<recipient-email>', '<text-content-to-be-sent>');
   ```
 
-  ​
