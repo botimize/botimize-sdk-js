@@ -1,5 +1,5 @@
 ## [botimize](botimize.io) - Analytics built to optimize your bots
-[![npm](https://img.shields.io/npm/v/botimize.svg?maxAge=2592000)](https://www.npmjs.com/package/botimize)
+[![npm](https://img.shields.io/npm/v/botimize.svg?style=flat-square)](https://www.npmjs.com/package/botimize)
 
 ### Setup
 
