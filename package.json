@@ -18,6 +18,7 @@
     "url": "https://github.com/botimize/botimize-sdk-js.git"
   },
   "scripts": {
+    "lint": "npm run lint:src && npm run lint:examples",
     "lint:examples": "eslint examples",
     "lint:src": "eslint src",
     "build": "babel src -d lib",
