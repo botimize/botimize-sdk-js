@@ -64,7 +64,7 @@ class BotimizeCore {
         platform: this.platform,
         direction: event,
         raw: _props,
-      }
+      },
     };
     makeRequest(options, (error) => {
       if (error) {

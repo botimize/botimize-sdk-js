@@ -132,10 +132,10 @@ function sendTextMessage(sender, text) {
     method: 'POST',
     json: {
       recipient: {
-        id: sender
+        id: sender,
       },
       message: messageData,
-    }
+    },
   };
   makeSendRequest(options);
 }
@@ -153,7 +153,7 @@ function sendGenericMessage(sender) {
           buttons: [{
             type: 'web_url',
             url: 'https://www.messenger.com',
-            title: 'web url'
+            title: 'web url',
           }, {
             type: 'postback',
             title: 'Postback',
@@ -168,9 +168,9 @@ function sendGenericMessage(sender) {
             title: 'Postback',
             payload: 'Payload for second element in a generic bubble',
           }],
-        }]
-      }
-    }
+        }],
+      },
+    },
   };
   var options = {
     url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -179,7 +179,7 @@ function sendGenericMessage(sender) {
     json: {
       recipient: {id: sender},
       message: messageData,
-    }
+    },
   };
   makeSendRequest(options);
 }
