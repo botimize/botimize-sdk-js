@@ -47,6 +47,22 @@
 - Send notifications via email:
 
   ```javascript
-  botimize.notify('<recipient-email>', '<text-content-to-be-sent>');
+  const data = {
+    to: '<recipient-email>',
+    text: '<text-content-to-be-sent>'
+  };
+  botimize.notify(data, 'email');
   ```
+
+- Send notification via Slack:
+
+  ```javascript
+  const data = {
+    to: '<incoming-webhook-url>',
+    text: '<text-content-to-be-sent>'
+  };
+  botimize.notify(data, 'slack');
+  ```
+
+  `data` can hava all properties supported by [Slack incoming webhook](https://api.slack.com/incoming-webhooks), e.g., `channel`, `username`, `icon_emoji`,  `attachments`, etc.
 

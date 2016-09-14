@@ -28,7 +28,10 @@
  *   2. Say: "Email"
  *      The bot will invoke notify API to send email to a specific recipient.
  *
- *   3. Say anything other than "Generic" and "Email":
+ *   3. Say: "Slack"
+ *      The bot will invoke notify API to send message to Slack.
+ *
+ *   4. Say anything other than "Generic", "Email", "Slack:
  *      The bot will echo the messages.
  *
  *
@@ -97,9 +100,22 @@ app.post('/webhook/', function (req, res) {
         continue;
       }
       if (text === 'Email') {
-        // Uncomment this line to use the notify API sending notifications.
-        // botimize.notify('<your-email>', 'notification message');
+        // Uncomment this line to use the notify API sending email notification.
+        // const data = {
+        //   to: '<your-email>',
+        //   text: 'notification message',
+        // };
+        // botimize.notify(data, 'email');
         console.log('Email sent');
+      }
+      if (text === 'Slack') {
+        // Uncomment this line to use the notify API sending slack notifications.
+        // const data = {
+        //   to: '<your-incoming-webhook-url>',
+        //   text: 'notification message',
+        // };
+        // botimize.notify(data, 'slack');
+        console.log('Message sent to Slack');
       }
       sendTextMessage(sender, 'Text received, echo: ' + text.substring(0, 200));
     }

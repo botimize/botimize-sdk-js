@@ -97,19 +97,16 @@ class BotimizeCore {
    *  notify
    *      send a notification event.
    */
-  notify(to, text, channel = 'email') {
+  notify(data, via = 'email') {
     const options = {
       method: 'POST',
       uri: API_URL + 'projects/notify',
       qs: {
         apikey: this.apiKey,
-        channel: channel,
+        via: via,
       },
       json: true,
-      body: {
-        to: to,
-        text: text,
-      },
+      body: data,
     };
     makeRequest(options, (error) => {
       if (error) {
