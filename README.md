@@ -54,7 +54,7 @@
   botimize.notify(data, 'email');
   ```
 
-- Send notification via Slack:
+- Send notifications via Slack:
 
   ```javascript
   const data = {
@@ -64,5 +64,5 @@
   botimize.notify(data, 'slack');
   ```
 
-  `data` can hava all properties supported by [Slack incoming webhook](https://api.slack.com/incoming-webhooks), e.g., `channel`, `username`, `icon_emoji`,  `attachments`, etc.
+  `data` can have all properties supported by [Slack incoming webhook](https://api.slack.com/incoming-webhooks), e.g., `channel`, `username`, `icon_emoji`,  `attachments`, etc.
 
