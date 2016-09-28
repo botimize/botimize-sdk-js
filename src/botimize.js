@@ -1,7 +1,6 @@
 import request from 'request';
 
-// const API_SERVER = "https://botimize.io";
-const API_URL = 'http://localhost:3030/api/';
+const API_URL = 'https://api.botimize.io';
 
 function makeRequest(options, cb) {
   // send request to api server
@@ -26,7 +25,7 @@ class BotimizeCore {
    *
    *  @param apiKey the access token for sending events to botimize api server.
    */
-  constructor(apiKey, platform) {
+  constructor(apiKey, platform, apiUrl = API_URL) {
     if (!apiKey) {
       throw new Error('No API key provided');
     }
@@ -35,6 +34,7 @@ class BotimizeCore {
     }
     this.apiKey = apiKey;
     this.platform = platform;
+    this.apiUrl = apiUrl;
     // super properties
     this.superProperties = {
       platform: platform,
@@ -54,7 +54,7 @@ class BotimizeCore {
 
     const options = {
       method: 'POST',
-      uri: API_URL + 'messages',
+      uri: this.apiUrl + '/messages',
       qs: {
         apikey: this.apiKey,
       },
@@ -100,7 +100,7 @@ class BotimizeCore {
   notify(data, via = 'email') {
     const options = {
       method: 'POST',
-      uri: API_URL + 'projects/notify',
+      uri: this.apiUrl + '/projects/notify',
       qs: {
         apikey: this.apiKey,
         via: via,
