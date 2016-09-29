@@ -25,7 +25,7 @@ class BotimizeCore {
    *
    *  @param apiKey the access token for sending events to botimize api server.
    */
-  constructor(apiKey, platform, apiUrl = API_URL) {
+  constructor(apiKey, platform, apiUrl) {
     if (!apiKey) {
       throw new Error('No API key provided');
     }
@@ -117,6 +117,6 @@ class BotimizeCore {
   }
 }
 
-export default function botimize(apiKey, platform) {
-  return new BotimizeCore(apiKey, platform);
+export default function botimize(apiKey, platform, apiUrl = API_URL) {
+  return new BotimizeCore(apiKey, platform, apiUrl);
 }
