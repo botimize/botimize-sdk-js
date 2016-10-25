@@ -25,7 +25,7 @@ class BotimizeCore {
    *
    *  @param apiKey the access token for sending events to botimize api server.
    */
-  constructor(apiKey, platform, apiUrl) {
+  constructor(apiKey, platform, options) {
     if (!apiKey) {
       throw new Error('No API key provided');
     }
@@ -34,7 +34,8 @@ class BotimizeCore {
     }
     this.apiKey = apiKey;
     this.platform = platform;
-    this.apiUrl = apiUrl;
+    this.apiUrl = options.apiUrl || API_URL;
+    this.debug = options.debug || false;
     // super properties
     this.superProperties = {
       platform: platform,
@@ -76,7 +77,9 @@ class BotimizeCore {
 
   logIncoming(data, source = 'npm') {
     const prefix = `[botimize][${this.platform}][incoming][${source}]`;
-    console.log(`${prefix}: ${JSON.stringify(data, null, 2)}`);
+    if (this.debug) {
+      console.log(`${prefix}: ${JSON.stringify(data, null, 2)}`);
+    }
     this.track('incoming', data);
   }
 
@@ -85,10 +88,14 @@ class BotimizeCore {
     if (this.platform === 'facebook' && source === 'npm') {
       let newData = data.json;
       newData.access_token = data.qs.access_token;
-      console.log(`${prefix}: ${JSON.stringify(newData, null, 2)}`);
+      if (this.debug) {
+        console.log(`${prefix}: ${JSON.stringify(newData, null, 2)}`);
+      }
       this.track('outgoing', newData);
     } else {
-      console.log(`${prefix}: ${JSON.stringify(data, null, 2)}`);
+      if (this.debug) {
+        console.log(`${prefix}: ${JSON.stringify(data, null, 2)}`);
+      }
       this.track('outgoing', data);
     }
   }
@@ -117,6 +124,6 @@ class BotimizeCore {
   }
 }
 
-export default function botimize(apiKey, platform, apiUrl = API_URL) {
-  return new BotimizeCore(apiKey, platform, apiUrl);
+export default function botimize(apiKey, platform, options = {}) {
+  return new BotimizeCore(apiKey, platform, options);
 }
