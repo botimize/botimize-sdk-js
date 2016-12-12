@@ -1,9 +1,9 @@
-## [botimize](http://botimize.io) - Analytics built to optimize your bots
+# [botimize](http://botimize.io) - Analytics built to optimize your bots
 
 [![build status](https://img.shields.io/travis/botimize/botimize-sdk-js/master.svg?style=flat-square)](https://travis-ci.org/botimize/botimize-sdk-js)
 [![npm version](https://img.shields.io/npm/v/botimize.svg?style=flat-square)](https://www.npmjs.com/package/botimize)
 
-### Setup
+## Setup
 
 * Create a free account at [botimize](http://botimize.io) to get an API key.
 * Install botimize SDK with `npm`:
@@ -12,16 +12,27 @@
   npm install --save botimize
   ```
 
-### Usage
+## Usage
 
-- Use API key to create a new botimize object:
+### Initialization
+
+Use API key to create a new botimize object
+
+- Facebook:
 
   ```javascript
   const botimize = require('botimize')('<YOUR-API-KEY'>, 'facebook');
   ```
 
-- Log incoming messages:
+- Generic Logging:
 
+  ```javascript
+  const botimize = require('botimize')('<YOUR-API-KEY'>, 'generic');
+  ```
+
+### Log incoming messages:
+
+- Facebook
   ```javascript
   app.post('/webhook', function (req, res)) {
     botimize.logIncoming(req.body);
@@ -29,8 +40,27 @@
   }
   ```
 
-- Log outgoing messages
+- Generic
+  ```javascript
+  app.post('/webhook', function (req, res)) {
+    const incomingLog = {
+      sender: {
+        id: 'UNIQUE_USER_ID',
+        name: 'USER_SCREEN_NAME'
+      },
+      content: {
+        type: 'CONTENT_TYPE', // 'text', 'image', 'audio', 'video', 'file', 'location'
+        text: 'CONTENT_TEXT'
+      }
+    };
+    botimize.logIncoming(incomingLog);
+    ...
+  }
+  ```
 
+### Log outgoing messages
+
+- Facebook
   ```javascript
   const options = {
     uri: 'https://graph.facebook.com/v2.6/me/messages',
@@ -44,7 +74,25 @@
   });
   ```
 
-- Send notifications via email:
+- Generic
+  ```javascript
+    const outgoingLog = {
+      receiver: {
+        id: 'UNIQUE_USER_ID',
+        name: 'USER_SCREEN_NAME'
+      },
+      content: {
+        type: 'CONTENT_TYPE', // 'text', 'image', 'audio', 'video', 'file', 'location'
+        text: 'CONTENT_TEXT'
+      }
+    };
+  request(options, function (error, response, body) {
+    botimize.logOutgoing(outgoingLog);
+    ...
+  });
+  ```
+
+### Send notifications via email:
 
   ```javascript
   const data = {
@@ -54,7 +102,7 @@
   botimize.notify(data, 'email');
   ```
 
-- Send notifications via Slack:
+### Send notifications via Slack:
 
   ```javascript
   const data = {
