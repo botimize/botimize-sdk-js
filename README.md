@@ -24,6 +24,18 @@ Use API key to create a new botimize object
   const botimize = require('botimize')('<YOUR-API-KEY'>, 'facebook');
   ```
 
+- Telegram:
+
+  ```javascript
+  const botimize = require('botimize')('<YOUR-API-KEY'>, 'telegram');
+  ```
+
+- Line:
+
+  ```javascript
+  const botimize = require('botimize')('<YOUR-API-KEY'>, 'line');
+  ```
+
 - Generic Logging:
 
   ```javascript
@@ -33,6 +45,22 @@ Use API key to create a new botimize object
 ### Log incoming messages:
 
 - Facebook
+  ```javascript
+  app.post('/webhook', function (req, res)) {
+    botimize.logIncoming(req.body);
+    ...
+  }
+  ```
+
+- Telegram
+  ```javascript
+  app.post('/webhook', function (req, res)) {
+    botimize.logIncoming(req.body);
+    ...
+  }
+  ```
+
+- Line
   ```javascript
   app.post('/webhook', function (req, res)) {
     botimize.logIncoming(req.body);
@@ -66,7 +94,40 @@ Use API key to create a new botimize object
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: PAGE_ACCESS_TOKEN },
     method: 'POST',
-    json: messageData
+    json: true,
+    body: messageData
+  };
+  request(options, function (error, response, body) {
+    botimize.logOutgoing(options);
+    ...
+  });
+  ```
+
+- Telegram
+  ```javascript
+  const options = {
+    uri: `https://api.telegram.org/bot${token}/sendMessage`,
+    method: 'POST',
+    json: true,
+    body: messageData
+  };
+  request(options, function (error, response, body) {
+    botimize.logOutgoing(options);
+    ...
+  });
+  ```
+
+- LINE
+  ```javascript
+  const options = {
+    uri: 'https://api.line.me/v2/bot/message/reply',
+    qs: { access_token: PAGE_ACCESS_TOKEN },
+    headers: {
+        'Authorization': `Bearer ${CHANNEL_ACCESS_TOKEN}`,
+    },
+    method: 'POST',
+    json: true,
+    body: messageData
   };
   request(options, function (error, response, body) {
     botimize.logOutgoing(options);
