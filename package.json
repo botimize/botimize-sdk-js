@@ -22,6 +22,7 @@
     "lint:examples": "eslint examples",
     "lint:src": "eslint src",
     "build": "babel src -d lib",
+    "prepare": "npm run build",
     "prepublish": "npm run build"
   },
   "main": "lib/botimize.js",
