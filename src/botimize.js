@@ -83,41 +83,45 @@ class BotimizeCore {
     });
   }
 
-  logIncoming(data, source = 'npm') {
-    const prefix = `[botimize][${this.platform}][incoming][${source}]`;
+  logIncoming(data, options = {}) {
+    const prefix = `[botimize][${this.platform}][incoming]`;
     if (this.debug) {
       console.log(`${prefix}: ${JSON.stringify(data, null, 2)}`);
     }
     this.track('incoming', data);
   }
 
-  logOutgoing(data, source = 'npm') {
-    const prefix = `[botimize][${this.platform}][outgoing][${source}]`;
+  logOutgoing(data, options = {}) {
+    const parse = options.parse || 'request';
+    const prefix = `[botimize][${this.platform}][outgoing]`;
     let formatedData = {};
-    if (_.isEmpty(data.json) === false) {
-      console.warn('deprecated usage');
-    }
 
     if (_.isEmpty(data.body) && _.isEmpty(data.json)) {
       console.error('empty body');
     }
 
-    if (this.platform === 'generic') {
+    if (this.platform === 'generic' || parse === 'pure') {
       formatedData = data;
-    } else if (this.platform === 'facebook' && source === 'npm') {
+    } else if (parse === 'request') {
       formatedData = data.body || data.json;
-      formatedData.accessToken = data.qs.access_token || data.access_token;
-    } else if (this.platform === 'telegram' && source === 'npm') {
-      const reg = /https:\/\/api\.telegram\.org\/bot(.*)\/(.*)/g;
-      const matches = reg.exec(data.uri || data.url);
-      formatedData = data.body || data.json;
-      formatedData.token = matches[1];
-      formatedData.method = matches[2];
-    } else if (this.platform === 'line' && source === 'npm') {
-      formatedData = data.body || data.json;
-      formatedData.channelAccessToken = data.headers['Authorization']
-        .replace('Bearer', '')
-        .trim();
+      try {
+        if (this.platform === 'facebook') {
+          formatedData.accessToken = data.qs.access_token || data.access_token;
+        } else if (this.platform === 'telegram') {
+          const reg = /https:\/\/api\.telegram\.org\/bot(.*)\/(.*)/g;
+          const matches = reg.exec(data.uri || data.url);
+          formatedData.token = matches[1];
+          formatedData.method = matches[2];
+        } else if (this.platform === 'line') {
+          formatedData.channelAccessToken = data.headers['Authorization']
+            .replace('Bearer', '')
+            .trim();
+        }
+      } catch (error) {
+        throw new Error(`Parsing error, platform: ${this.platform}, data: ${JSON.stringify(data)}, options: ${JSON.stringify(options)}`);
+      }
+    } else {
+      throw new Error('unknow parsing method: ' + parse);
     }
 
     this.track('outgoing', formatedData);
