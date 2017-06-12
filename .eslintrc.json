@@ -2,6 +2,10 @@
   "extends" : [
     "standard"
   ],
+  "env": {
+    "node": true,
+    "jest": true
+  },
   "rules": {
     "strict": 0,
     "comma-dangle": [1, "always-multiline"],
