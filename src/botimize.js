@@ -96,13 +96,12 @@ class BotimizeCore {
     const prefix = `[botimize][${this.platform}][outgoing]`;
     let formatedData = {};
 
-    if (_.isEmpty(data.body) && _.isEmpty(data.json)) {
-      console.error('empty body');
-    }
-
     if (this.platform === 'generic' || parse === 'pure') {
       formatedData = data;
     } else if (parse === 'request') {
+      if (_.isEmpty(data.body) && _.isEmpty(data.json)) {
+        console.error('empty body');
+      }
       formatedData = data.body || data.json;
       try {
         if (this.platform === 'facebook') {
