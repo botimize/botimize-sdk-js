@@ -5,17 +5,17 @@
 
 ## Table of contents
 
-- [Setup](#Setup)
-- [Usage](#Usage)
-- [Initialization](#Initialization)
+- [Setup](#setup)
+- [Usage](#usage)
+- [Initialization](#initialization)
 - [Log incoming messages](#log-incoming-messages)
 - [Log outgoing messages](#log-outgoing-messages)
-- [Send notifications](#Send-notifications)
+- [Send notifications](#send-notifications)
 - [References & Full Examples](#references--full-examples)
 
 ## Setup
 
-* Create a free account at [Botimize](http://botimize.io) to get an API key. Or you can talk to our botimize helper [Facebook Messenger Helper](http://m.me/botimize.helper) or [Telegram Helper](http://t.me/botimize.helper) to create a public project.
+* Create a free account at [Botimize](http://botimize.io) to get an API key. Or you can talk to our botimize helper [Telegram Helper](http://t.me/Botimize_helper_bot) to create a public project.
 * Install botimize SDK with `npm`:
 
   ```shell
