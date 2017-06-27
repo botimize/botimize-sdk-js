@@ -15,7 +15,7 @@
 
 ## Setup
 
-* Create a free account at [Botimize](http://botimize.io) to get an API key. Or you can talk to our botimize helper [Telegram Helper](http://t.me/Botimize_helper_bot) to create a public project.
+* Create a free account at [Botimize](http://botimize.io) to get an API key. Or you can talk to our botimize helper [Telegram Helper](http://t.me/Botimize_helper_bot) and [Facebook Helper](https://github.com/botimize/botimize-sdk-js.git) to create a public project.
 * Install botimize SDK with `npm`:
 
   ```shell
