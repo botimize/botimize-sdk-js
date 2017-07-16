@@ -15,7 +15,7 @@
 
 ## Setup
 
-* Create a free account at [Botimize](http://botimize.io) to get an API key. Or you can talk to our botimize helper [Telegram Helper](http://t.me/Botimize_helper_bot) and [Facebook Helper](http://m.me/1388873027826395) to create a public project.
+* Create a free account at [Botimize](http://botimize.io) to get an API key.
 * Install botimize SDK with `npm`:
 
   ```shell
@@ -40,29 +40,108 @@ Use Botimize API key to create a new botimize object, and `<PLATFORM>` should be
 To log incoming message is very easy, just put the body received from platform webhook into `logIncoming()`. Both string and object type are good to be put.
 
 #### Facebook / Telegram / LINE
-  ```javascript
-  app.post('/webhook', function (req, res)) {
-    botimize.logIncoming(req.body);
-    ...
-  }
-  ```
+
+```javascript
+app.post('/webhook', function (req, res)) {
+  botimize.logIncoming(req.body);
+  // ...
+}
+```
+
+##### [Facebook request body example](https://developers.facebook.com/docs/messenger-platform/webhook-reference#format)
+```json
+{
+  "object": "page",
+  "entry": [
+    {
+      "id": "247349599062786",
+      "time": 1492541234486,
+      "messaging": [
+        {
+          "sender": {
+            "id": "1846048872078817"
+          },
+          "recipient": {
+            "id": "247349599062786"
+          },
+          "timestamp": 1492541234394,
+          "message": {
+            "mid": "mid.$cAAC6AFgUYTphs6kk2lbgmPaOon0R",
+            "seq": 3915,
+            "text": "hello facebook"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+##### [Telegram request body example](https://core.telegram.org/bots/api#getting-updates)
+```json
+{
+   "update_id":596819141,
+   "message":{
+      "message_id":27,
+      "from":{
+         "id":161696362,
+         "first_name":"Kuan-Hung",
+         "username":"godgunman"
+      },
+      "chat":{
+         "id":161696362,
+         "first_name":"Kuan-Hung",
+         "username":"godgunman",
+         "type":"private"
+      },
+      "date":1492511288,
+      "text":"hello telegram"
+   }
+} 
+```
+##### [LINE request body example](https://devdocs.line.me/en/#webhook-event-object)
+```json
+{
+   "events":[
+      {
+         "type":"message",
+         "replyToken":"6a37af4d99a94ce9bbe9184171398b70",
+         "source":{
+            "userId":"Uc76d8ae9ccd1ada4f06c4e1515d46466",
+            "type":"user"
+         },
+         "timestamp":1492439626890,
+         "message":{
+            "type":"text",
+            "id":"5952264121603",
+            "text":"hello"
+         }
+      }
+   ]
+}
+```
 
 #### Generic
-  ```javascript
-  app.post('/webhook', function (req, res)) {
-    const incomingLog = {
-      sender: {
-        id: '<UNIQUE_USER_ID>',
-        name: '<USER_SCREEN_NAME>'
-      },
-      content: {
-        type: '<CONTENT_TYPE>', // 'text', 'image', 'audio', 'video', 'file', 'location'
-        text: '<CONTENT_TEXT>'
-      }
-    };
-    botimize.logIncoming(incomingLog);
-    ...
-  }
+```javascript
+app.post('/webhook', function (req, res)) {
+  const incomingLog = {
+    timestamp: '<TIME OF MESSAGE(in milliseconds)>',
+    recipient: {
+      id: '<UUID_OF_RECIPIENT>',
+      name: '<NAME_OF_RECIPIENT>'
+    },
+    sender: {
+      id: '<UUID_OF_SENDER>',
+      name: '<NAME_OF_SENDER>'
+    },
+    message: {
+      type: '<MESSAGE_TYPE>', // 'text', 'image', 'audio', 'video', 'file', 'location'
+      text: '<MESSAGE_CONTENT>'
+    }
+  };
+  botimize.logIncoming(incomingLog);
+  // ...
+}
   ```
 
 ### Log outgoing messages
@@ -116,7 +195,7 @@ For logging outgoing message, Botimize SDK provides two methods to parse the dat
   };
   request(options, function (error, response, body) {
     botimize.logOutgoing(options, {parse: 'request'});
-    ...
+    // ...
   });
   ```
 - For those who are not using request to send outgoing messages: Use data format structure listed as below.
@@ -151,7 +230,7 @@ For logging outgoing message, Botimize SDK provides two methods to parse the dat
   };
   request(options, function (error, response, body) {
     botimize.logOutgoing(options, {parse: 'request'});
-    ...
+    // ...
   });
   ```
 - For those who are not using request to send outgoing messages: Use data format structure listed as below.
@@ -175,19 +254,24 @@ For logging outgoing message, Botimize SDK provides two methods to parse the dat
   ```
 
 #### Generic
-  ```javascript
-  const outgoingLog = {
-    receiver: {
-      id: 'UNIQUE_USER_ID',
-      name: 'USER_SCREEN_NAME'
-    },
-    content: {
-      type: 'CONTENT_TYPE', // 'text', 'image', 'audio', 'video', 'file', 'location'
-      text: 'CONTENT_TEXT'
-    },
-  };
-  botimize.logOutgoing(outgoingLog, {parse: 'pure'});
-  ```
+```javascript
+const outgoingLog = {
+  timestamp: '<TIME OF MESSAGE(in milliseconds)>',
+  recipient: {
+    id: '<UUID_OF_RECIPIENT>',
+    name: '<NAME_OF_RECIPIENT>'
+  },
+  sender: {
+    id: '<UUID_OF_SENDER>',
+    name: '<NAME_OF_SENDER>'
+  },
+  message: {
+    type: '<MESSAGE_TYPE>', // 'text', 'image', 'audio', 'video', 'file', 'location'
+    text: '<MESSAGE_CONTENT>'
+  }
+};
+botimize.logOutgoing(outgoingLog, {parse: 'pure'});
+```
 
 ## Send notifications
 
