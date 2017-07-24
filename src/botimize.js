@@ -1,7 +1,7 @@
 import request from 'request';
 import _ from 'lodash';
 
-const API_URL = 'https://api.botimize.io';
+const API_URL = 'https://api.getbotimize.com';
 const SUPPORTED_PLATFORM = ['facebook', 'telegram', 'line', 'generic'];
 
 function makeRequest(options, cb) {
