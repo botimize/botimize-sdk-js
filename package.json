@@ -8,6 +8,7 @@
   "keywords": [
     "botimize",
     "bot",
+    "chatbot",
     "sdk",
     "analysis"
   ],
@@ -44,8 +45,7 @@
     "eslint-plugin-standard": "^2.0.0",
     "express": "^4.14.0",
     "jest": "^20.0.4",
-    "localtunnel": "^1.8.1",
-    "request": "^2.74.0"
+    "localtunnel": "^1.8.1"
   },
   "jest": {
     "verbose": true
