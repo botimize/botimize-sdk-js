@@ -13,4 +13,5 @@ branches:
   - master
   - dev
 notifications:
-  email: false
+  email:
+    - ggm@getbotimize.com
