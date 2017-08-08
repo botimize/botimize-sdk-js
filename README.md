@@ -37,20 +37,21 @@ Use Botimize API key to create a new botimize object, and `<PLATFORM>` should be
 
 ### Log incoming messages:
 
-To log incoming message is very easy, just put the body received from platform webhook into `logIncoming()`. Both string and object type are good to be put.
+The log incoming message put into `logIncoming()` is slightly different from the body received from platform webhook but not complicated. For the sake of convience, the body sent are avaliable for both string and object type.
 
-#### Facebook / Telegram / LINE
+#### Facebook
+
+- Use data format structure listed as below, where the messageBody is getting from [Facebook request body example](https://developers.facebook.com/docs/messenger-platform/webhook-reference#format).
 
 ```javascript
-app.post('/webhook', function (req, res)) {
-  botimize.logIncoming(req.body);
-  // ...
-}
+let data = {
+  ...messageBody,
+  accessToken,
+};
+botimize.logIncoming(data);
 ```
-
-##### [Facebook request body example](https://developers.facebook.com/docs/messenger-platform/webhook-reference#format)
-```json
-{
+```javascript
+let data = {
   "object": "page",
   "entry": [
     {
@@ -73,13 +74,25 @@ app.post('/webhook', function (req, res)) {
         }
       ]
     }
-  ]
-}
+  ],
+  accessToken: 'EAAXUgsVmiP8BAMcRWxLa1N5RycMzZBfjwiekoqCik6pZASPsnmkJtG29gp5QXdyMaKfFg0iZCIDlqhfhTZCLqRKuM4hUCfdZBcxl8GzKgZA0AwI8syxG49M9OaZCsjyZC8FPg30yIRDFG5hp9jNNtvqtWW0KKzB9a59rTkZBsgz2oe4QZDZD',
+};
+botimize.logIncoming(data);
 ```
 
-##### [Telegram request body example](https://core.telegram.org/bots/api#getting-updates)
-```json
-{
+#### Telegram
+
+- Use data format structure listed as below, where the messageBody is getting from [Telegram request body example](https://core.telegram.org/bots/api#getting-updates).
+
+```javascript
+let data = {
+  ...messageBody,
+  token,
+};
+botimize.logIncoming(data);
+```
+```javascript
+let data = {
    "update_id":596819141,
    "message":{
       "message_id":27,
@@ -96,12 +109,24 @@ app.post('/webhook', function (req, res)) {
       },
       "date":1492511288,
       "text":"hello telegram"
-   }
-} 
+   },
+   token: '308726257:AAHnmJpvkAepqirk82ZOrgtF6Hz2ijbRavA',
+};
+botimize.logIncoming(data);
 ```
-##### [LINE request body example](https://devdocs.line.me/en/#webhook-event-object)
-```json
-{
+
+#### Line
+
+- Use data format structure listed as below, where the messageBody is getting from [LINE request body example](https://devdocs.line.me/en/#webhook-event-object).
+
+```javascript
+let data = {
+  ...messageBody,
+  channelAccessToken,
+};
+```
+```javascript
+let data = {
    "events":[
       {
          "type":"message",
@@ -117,8 +142,9 @@ app.post('/webhook', function (req, res)) {
             "text":"hello"
          }
       }
-   ]
-}
+   ],
+   channelAccessToken: 'GxvuC0QfatJ0/Bv5d3DoVbUcfVd6MXLj9QY8aFHSqCYJkZhKG6u5I5dtbKZBNMbmLmwKox1Ktd0Kcwfsxm9S5OmIwQoChcV1gPlK/1CI8cUe3eqaG/UrqL65y1Birb6rnssT0Acaz+7Lr7V2WVnwrQdB04t89/1O/w1cDnyilFU=',
+};
 ```
 
 #### Generic
