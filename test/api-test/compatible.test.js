@@ -1,11 +1,13 @@
 import request from 'request';
 import Botimize from '../../src/botimize';
 
+const API_HOST = 'https://api-stg.getbotimize.com';
+
 describe('Botimize SDK Compatibility Test', () => {
   let botimize;
   beforeAll((done) => {
     let options = {
-      url: 'https://api-stg.botimize.io/projects/public',
+      url: `${API_HOST}/projects/public`,
       method: 'POST',
       json: true,
       body: {
@@ -16,7 +18,7 @@ describe('Botimize SDK Compatibility Test', () => {
     request(options, (error, response, body) => {
       if (error) { console.trace(error); }
       botimize = Botimize(body.apikey, 'facebook', {
-        apiUrl: 'http://api-stg.botimize.io',
+        apiUrl: API_HOST,
       });
       expect(error).toBeNull();
       done();

@@ -58,14 +58,14 @@ class BotimizeCore {
    *  @param event the event name.
    *  @param properties the event properties.
    */
-  track(event, properties) {
+  track(event, properties, options = {}) {
     const _props = JSON.parse(JSON.stringify(properties));
 
-    const options = {
+    const requestOptions = {
       method: 'POST',
       uri: this.apiUrl + '/messages',
       qs: {
-        apikey: this.apiKey,
+        apikey: options.apiKey || this.apiKey,
       },
       json: true,
       body: {
@@ -75,7 +75,7 @@ class BotimizeCore {
         raw: _props,
       },
     };
-    makeRequest(options, error => {
+    makeRequest(requestOptions, error => {
       if (error) {
         console.log('failed to send track event to botimize server.');
         console.log(error);
@@ -88,7 +88,7 @@ class BotimizeCore {
     if (this.debug) {
       console.log(`${prefix}: ${JSON.stringify(data, null, 2)}`);
     }
-    this.track('incoming', data);
+    this.track('incoming', data, options);
   }
 
   logOutgoing(data, options = {}) {
@@ -123,7 +123,7 @@ class BotimizeCore {
       throw new Error('unknow parsing method: ' + parse);
     }
 
-    this.track('outgoing', formatedData);
+    this.track('outgoing', formatedData, options);
 
     if (this.debug) {
       console.log(`${prefix}: ${JSON.stringify(formatedData, null, 2)}`);
@@ -134,18 +134,18 @@ class BotimizeCore {
    *  notify
    *      send a notification event.
    */
-  notify(data, via = 'email') {
-    const options = {
+  notify(data, via = 'email', options = {}) {
+    const requestOptions = {
       method: 'POST',
       uri: this.apiUrl + '/projects/notify',
       qs: {
-        apikey: this.apiKey,
+        apikey: options.apiKey || this.apiKey,
         via: via,
       },
       json: true,
       body: data,
     };
-    makeRequest(options, error => {
+    makeRequest(requestOptions, error => {
       if (error) {
         console.log('failed to send notification to botimize server.');
         console.log(error);

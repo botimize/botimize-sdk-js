@@ -1,6 +1,6 @@
 {
   "name": "botimize",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The sdk of botimize",
   "directories": {
     "lib": "./lib"
@@ -12,7 +12,7 @@
     "sdk",
     "analysis"
   ],
-  "author": "botimize, Inc. <dev@botimize.io>",
+  "author": "Botimize, Inc. <dev@getbotimize.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
