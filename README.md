@@ -145,6 +145,7 @@ let data = {
    ],
    channelAccessToken: 'GxvuC0QfatJ0/Bv5d3DoVbUcfVd6MXLj9QY8aFHSqCYJkZhKG6u5I5dtbKZBNMbmLmwKox1Ktd0Kcwfsxm9S5OmIwQoChcV1gPlK/1CI8cUe3eqaG/UrqL65y1Birb6rnssT0Acaz+7Lr7V2WVnwrQdB04t89/1O/w1cDnyilFU=',
 };
+botimize.logIncoming(data);
 ```
 
 #### Generic
