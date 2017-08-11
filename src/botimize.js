@@ -79,6 +79,7 @@ class BotimizeCore {
       if (error) {
         console.log('failed to send track event to botimize server.');
         console.log(error);
+        console.log(requestOptions);
       }
     });
   }
