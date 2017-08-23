@@ -37,7 +37,11 @@ Use Botimize API key to create a new botimize object, and `<PLATFORM>` should be
 
 ### Log incoming messages:
 
-The log incoming message put into `logIncoming()` is slightly different from the body received from platform webhook but not complicated. For the sake of convience, the body sent are avaliable for both string and object type.
+The log incoming message put into `logIncoming()` is slightly different from the body received from platform webhook but not complicated. You can also put the body received from platform webhook directly into `logIncoming()`. For the sake of convience, the body sent are avaliable for both string and object type.
+
+The diffenece between the bodies is with one more field. For facebook, we have `accessToken` as an additional field. For telegram, we have `token` as an additionl field. For line, we have `channelAccessToken` as an additional field. The reason why we need this additional field is because this access token allow us to get the profiles of users. Hence, the users' profiles are shown on our dashboard.
+
+If you are intrested in the api for getting users' profiles, take a look at [facebook profile api](https://developers.facebook.com/docs/messenger-platform/user-profile), [telegram profile api](https://core.telegram.org/bots/api#userprofilephotos), and [line profile api](https://devdocs.line.me/en/#bot-api-get-profile).
 
 #### Facebook
 
