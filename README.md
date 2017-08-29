@@ -47,110 +47,111 @@ If you are intrested in the api for getting users' profiles, take a look at [fac
 
 - Use data format structure listed as below, where the messageBody is getting from [Facebook request body example](https://developers.facebook.com/docs/messenger-platform/webhook-reference#format).
 
-```javascript
-let data = {
-  ...messageBody,
-  accessToken,
-};
-botimize.logIncoming(data);
-```
-```javascript
-let data = {
-  "object": "page",
-  "entry": [
-    {
-      "id": "247349599062786",
-      "time": 1492541234486,
-      "messaging": [
-        {
-          "sender": {
-            "id": "1846048872078817"
-          },
-          "recipient": {
-            "id": "247349599062786"
-          },
-          "timestamp": 1492541234394,
-          "message": {
-            "mid": "mid.$cAAC6AFgUYTphs6kk2lbgmPaOon0R",
-            "seq": 3915,
-            "text": "hello facebook"
+  ```javascript
+  let data = {
+    ...messageBody,
+    accessToken,
+  };
+  botimize.logIncoming(data);
+  ```
+  ```javascript
+  let data = {
+    object: 'page',
+    entry: [
+      {
+        id: '247349599062786',
+        time: 1492541234486,
+        messaging: [
+          {
+            sender: {
+              id: '1846048872078817'
+            },
+            recipient: {
+              id: '247349599062786'
+            },
+            timestamp: 1492541234394,
+            message: {
+              mid: 'mid.$cAAC6AFgUYTphs6kk2lbgmPaOon0R',
+              seq: 3915,
+              text: 'hello facebook'
+            }
           }
-        }
-      ]
-    }
-  ],
-  accessToken: 'EAAXUgsVmiP8BAMcRWxLa1N5RycMzZBfjwiekoqCik6pZASPsnmkJtG29gp5QXdyMaKfFg0iZCIDlqhfhTZCLqRKuM4hUCfdZBcxl8GzKgZA0AwI8syxG49M9OaZCsjyZC8FPg30yIRDFG5hp9jNNtvqtWW0KKzB9a59rTkZBsgz2oe4QZDZD',
-};
-botimize.logIncoming(data);
-```
+        ]
+      }
+    ],
+    accessToken: 'EAAXUgsVmiP8BAMcRWxLa1N5RycMzZBfjwiekoqCik6pZASPsnmkJtG29gp5QXdyMaKfFg0iZCIDlqhfhTZCLqRKuM4hUCfdZBcxl8GzKgZA0AwI8syxG49M9OaZCsjyZC8FPg30yIRDFG5hp9jNNtvqtWW0KKzB9a59rTkZBsgz2oe4QZDZD',
+  };
+  botimize.logIncoming(data);
+  ```
 
 #### Telegram
 
 - Use data format structure listed as below, where the messageBody is getting from [Telegram request body example](https://core.telegram.org/bots/api#getting-updates).
 
-```javascript
-let data = {
-  ...messageBody,
-  token,
-};
-botimize.logIncoming(data);
-```
-```javascript
-let data = {
-   "update_id":596819141,
-   "message":{
-      "message_id":27,
-      "from":{
-         "id":161696362,
-         "first_name":"Kuan-Hung",
-         "username":"godgunman"
+  ```javascript
+  let data = {
+    ...messageBody,
+    token,
+  };
+  botimize.logIncoming(data);
+  ```
+  ```javascript
+  let data = {
+    update_id: 596819141,
+    message: {
+      message_id: 27,
+      from: {
+        id: 161696362,
+        first_name: 'Kuan-Hung',
+        username: 'godgunman'
       },
-      "chat":{
-         "id":161696362,
-         "first_name":"Kuan-Hung",
-         "username":"godgunman",
-         "type":"private"
+      chat: {
+        id: 161696362,
+        first_name: 'Kuan-Hung',
+        username: 'godgunman',
+        type: 'private'
       },
-      "date":1492511288,
-      "text":"hello telegram"
-   },
-   token: '308726257:AAHnmJpvkAepqirk82ZOrgtF6Hz2ijbRavA',
-};
-botimize.logIncoming(data);
-```
+      date: 1492511288,
+      text: 'hello telegram'
+    },
+    token: '308726257:AAHnmJpvkAepqirk82ZOrgtF6Hz2ijbRavA',
+  };
+  botimize.logIncoming(data);
+  ```
 
 #### Line
 
 - Use data format structure listed as below, where the messageBody is getting from [LINE request body example](https://devdocs.line.me/en/#webhook-event-object).
 
-```javascript
-let data = {
-  ...messageBody,
-  channelAccessToken,
-};
-```
-```javascript
-let data = {
-   "events":[
+  ```javascript
+  let data = {
+    ...messageBody,
+    channelAccessToken,
+  };
+  ```
+  ```javascript
+  let data = {
+    events: [
       {
-         "type":"message",
-         "replyToken":"6a37af4d99a94ce9bbe9184171398b70",
-         "source":{
-            "userId":"Uc76d8ae9ccd1ada4f06c4e1515d46466",
-            "type":"user"
-         },
-         "timestamp":1492439626890,
-         "message":{
-            "type":"text",
-            "id":"5952264121603",
-            "text":"hello"
-         }
+        type: 'message',
+        replyToken: '6a37af4d99a94ce9bbe9184171398b70',
+        source: {
+          userId: 'Uc76d8ae9ccd1ada4f06c4e1515d46466',
+          type: 'user'
+        },
+        timestamp: 1492439626890,
+        message: {
+          type: 'text',
+          id: '5952264121603',
+          text: 'hello'
+        }
       }
-   ],
-   channelAccessToken: 'GxvuC0QfatJ0/Bv5d3DoVbUcfVd6MXLj9QY8aFHSqCYJkZhKG6u5I5dtbKZBNMbmLmwKox1Ktd0Kcwfsxm9S5OmIwQoChcV1gPlK/1CI8cUe3eqaG/UrqL65y1Birb6rnssT0Acaz+7Lr7V2WVnwrQdB04t89/1O/w1cDnyilFU=',
-};
-botimize.logIncoming(data);
-```
+    ],
+    channelAccessToken: 'GxvuC0QfatJ0/Bv5d3DoVbUcfVd6MXLj9QY8aFHSqCYJkZhKG6u5I5dtbKZBNMbmLmwKox1Ktd0Kcwfsxm9S5OmIwQoChcV1gPlK/1CI8cUe3eqaG/UrqL65y1Birb6rnssT0Acaz+7Lr7V2WVnwrQdB04t89/1O/w1cDnyilFU=',
+  };
+
+  botimize.logIncoming(data);
+  ```
 
 #### Generic
 ```javascript
@@ -173,7 +174,7 @@ app.post('/webhook', function (req, res)) {
   botimize.logIncoming(incomingLog);
   // ...
 }
-  ```
+```
 
 ### Log outgoing messages
 
@@ -203,15 +204,15 @@ For logging outgoing message, Botimize SDK provides two methods to parse the dat
     ...messageBody,
     accessToken,
   };
-  botimize.logOutgoing(data, {parse: 'pure'});
+  botimize.logOutgoing(data, { parse: 'pure' });
   ```
   ```javascript
   let data = {
     recipient: { id: '1487766407960998' },
-    message: 'hello facebook messenger',
+    message: { text: 'hello facebook messenger' },
     accessToken: 'EAAXUgsVmiP8BAMcRWxLa1N5RycMzZBfjwiekoqCik6pZASPsnmkJtG29gp5QXdyMaKfFg0iZCIDlqhfhTZCLqRKuM4hUCfdZBcxl8GzKgZA0AwI8syxG49M9OaZCsjyZC8FPg30yIRDFG5hp9jNNtvqtWW0KKzB9a59rTkZBsgz2oe4QZDZD'
   };
-  botimize.logOutgoing(data, {parse: 'pure'});
+  botimize.logOutgoing(data, { parse: 'pure' });
   ```
 
 
@@ -225,7 +226,7 @@ For logging outgoing message, Botimize SDK provides two methods to parse the dat
     body: messageBody,
   };
   request(options, function (error, response, body) {
-    botimize.logOutgoing(options, {parse: 'request'});
+    botimize.logOutgoing(options, { parse: 'request' });
     // ...
   });
   ```
@@ -235,7 +236,7 @@ For logging outgoing message, Botimize SDK provides two methods to parse the dat
     ...messageBody,
     token,
   };
-  botimize.logOutgoing(data, {parse: 'pure'});
+  botimize.logOutgoing(data, { parse: 'pure' });
   ```
 
   ```javascript
@@ -244,7 +245,7 @@ For logging outgoing message, Botimize SDK provides two methods to parse the dat
     text: 'hello telegram',
     token: '308726257:AAHnmJpvkAepqirk82ZOrgtF6Hz2ijbRavA',
   };
-  botimize.logOutgoing(data, {parse: 'pure'});
+  botimize.logOutgoing(data, { parse: 'pure' });
   ```
 
 #### LINE
@@ -260,7 +261,7 @@ For logging outgoing message, Botimize SDK provides two methods to parse the dat
     body: messageBody
   };
   request(options, function (error, response, body) {
-    botimize.logOutgoing(options, {parse: 'request'});
+    botimize.logOutgoing(options, { parse: 'request' });
     // ...
   });
   ```
@@ -270,7 +271,7 @@ For logging outgoing message, Botimize SDK provides two methods to parse the dat
     ...messageBody,
     channelAccessToken,
   };
-  botimize.logOutgoing(data, {parse: 'pure'});
+  botimize.logOutgoing(data, { parse: 'pure' });
   ```
   ```javascript
   let data = {
@@ -281,28 +282,28 @@ For logging outgoing message, Botimize SDK provides two methods to parse the dat
     }],
     channelAccessToken: 'GxvuC0QfatJ0/Bv5d3DoVbUcfVd6MXLj9QY8aFHSqCYJkZhKG6u5I5dtbKZBNMbmLmwKox1Ktd0Kcwfsxm9S5OmIwQoChcV1gPlK/1CI8cUe3eqaG/UrqL65y1Birb6rnssT0Acaz+7Lr7V2WVnwrQdB04t89/1O/w1cDnyilFU=',
   };
-  botimize.logOutgoing(data, {parse: 'pure'});
+  botimize.logOutgoing(data, { parse: 'pure' });
   ```
 
 #### Generic
-```javascript
-const outgoingLog = {
-  timestamp: '<TIME OF MESSAGE(in milliseconds)>',
-  recipient: {
-    id: '<UUID_OF_RECIPIENT>',
-    name: '<NAME_OF_RECIPIENT>'
-  },
-  sender: {
-    id: '<UUID_OF_SENDER>',
-    name: '<NAME_OF_SENDER>'
-  },
-  message: {
-    type: '<MESSAGE_TYPE>', // 'text', 'image', 'audio', 'video', 'file', 'location'
-    text: '<MESSAGE_CONTENT>'
-  }
-};
-botimize.logOutgoing(outgoingLog, {parse: 'pure'});
-```
+  ```javascript
+  const outgoingLog = {
+    timestamp: '<TIME OF MESSAGE(in milliseconds)>',
+    recipient: {
+      id: '<UUID_OF_RECIPIENT>',
+      name: '<NAME_OF_RECIPIENT>'
+    },
+    sender: {
+      id: '<UUID_OF_SENDER>',
+      name: '<NAME_OF_SENDER>'
+    },
+    message: {
+      type: '<MESSAGE_TYPE>', // 'text', 'image', 'audio', 'video', 'file', 'location'
+      text: '<MESSAGE_CONTENT>'
+    }
+  };
+  botimize.logOutgoing(outgoingLog, { parse: 'pure' });
+  ```
 
 ## Send notifications
 
