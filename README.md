@@ -1,4 +1,4 @@
-# [botimize](http://botimize.io) - Analytics built to optimize your bots
+# [botimize](https://www.getbotimize.com/) - Analytics built to optimize your bots
 
 [![build status](https://img.shields.io/travis/botimize/botimize-sdk-js/master.svg?style=flat-square)](https://travis-ci.org/botimize/botimize-sdk-js)
 [![npm version](https://img.shields.io/npm/v/botimize.svg?style=flat-square)](https://www.npmjs.com/package/botimize)
@@ -15,7 +15,7 @@
 
 ## Setup
 
-* Create a free account at [Botimize](http://botimize.io) to get an API key.
+* Create a free account at [Botimize](https://www.getbotimize.com/) to get an API key.
 * Install botimize SDK with `npm`:
 
   ```shell
